@@ -73,34 +73,40 @@ function validateEmail() {
         html = emailNullMsg;      
     } else if (!email.value.match(emailRegex)) {
         html = emailFormatMsg;
+    } else if (checkImageRepeats(email.value, img.src) === true) {
+        html = repeatImgMsg; 
     } else {
-        pushToDB(email.value, img.src)
-        html = emailSuccessMsg;    
+        pushToDB(email.value, img.src);
+        html = emailSuccessMsg;   
     }
     emailMsg.textContent = html;
 }
 
-// function checkImageRepeats() {
-//     let imageExists;
-//     for (let j = 0; j < db[i].images.length; j++) {
-//         if (image === db[i].images[j]) {
-//             imageExists = true;
-//         } else {
-//             imageExists = false;
-//             pushToDB (email.value, img.src)    
-//         }
-//     }
-//     if (!imageExists) {
-//         return true
-//     }
-// }
+function checkImageRepeats(emailIn, image) {
+    for (let i = 0; i < db.length; i++) {
+        if (db[i].email === emailIn) {
+            let imageExists;
+            for (let j = 0; j < db[i].images.length; j++) {
+                if (image === db[i].images[j]) {
+                    imageExists = true;
+                    break;
+                } else {
+                    imageExists = false;    
+                }
+            }
+            if (imageExists) {
+                return true
+            }
+        }
+    }
+}
 
 //pust object to databass
 
-function pushToDB(emailA, image) {
+function pushToDB(emailIn, image) {
     let emailExists;
     for (let i = 0; i < db.length; i++) {
-        if (db[i].email === emailA) {
+        if (db[i].email === emailIn) {
             db[i].images.push(image)
             emailExists = true;
             break;
