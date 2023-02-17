@@ -12,10 +12,8 @@ const emailNullMsg = "Please enter your email";
 const emailFormatMsg = "Please enter a valid email";
 const emailSuccessMsg = "Success! your email has been linked to the image";
 const repeatImgMsg = "Image is aleardy Linked to email Address";
-
-// Placeholder element shown while an image is loading:
-const linkedIcon = `<i class="fa-solid fa-link"></i>`;
-
+const pod = document.querySelector('.link_img');
+ 
 //email and image shorage
 let db = [];
 
@@ -25,6 +23,7 @@ const searchMsg = document.querySelector("#search_msg");
 const searchBtn = document.querySelector(".search_submit");
 const imageGallery = document.querySelector('#image_gallery');
 const searchNotFoundMsg = "Email address not recognised";
+const imageGalleryCont = document.querySelector('#image_gallery_container');
 
 //Fetch functions
 
@@ -109,6 +108,7 @@ function checkImageRepeats(emailIn, image) {
 //pust object to databass
 
 function pushToDB(emailIn, image) {
+
     let emailExists;
     for (let i = 0; i < db.length; i++) {
         if (db[i].email === emailIn) {
@@ -122,36 +122,50 @@ function pushToDB(emailIn, image) {
     if (!emailExists) {
         db.push({email: email.value, images: [image]});
     }
+    pod.style.boxShadow = 'none';
+    pod.style.boxShadow = 'rgba(37, 162, 90, 0.25) 0px 54px 55px, rgba(37, 162, 90, 0.12) 0px -12px 30px, rgba(37, 162, 90, 0.12) 0px 4px 6px, rgba(37, 162, 90, 0.17) 0px 12px 13px, rgba(37, 162, 90, 0.09) 0px -3px 5px';
     emailBtn.style.display = 'none';
     setTimeout( function() {
         changeImage()
+        pod.style.boxShadow = 'rgba(0, 0, 0, 0.35) 0px 5px 15px';
         emailMsg.textContent = '';
         emailBtn.style.display = 'block';
-    },2000);
+    },2000); 
 }
 
 
 //retrieve images 
 
 function retrieveImages() {
-    let searchExists;
-    for (let i = 0; i < db.length; i++) {
-        if (db[i].email === search.value) {
-            imageGallery.innerHTML = '';
-            for (let j = 0; j < db[i].images.length; j++) {
-                let html = `
-                <img src='${db[i].images[j]}'>
-                `;
-                imageGallery.innerHTML += html;
+    if (imageGalleryCont.style.display === 'flex') {
+        imageGalleryCont.style.display = 'none';    
+    } else {
+        let searchExists;
+        for (let i = 0; i < db.length; i++) {
+            if (db[i].email === search.value) {
+                imageGalleryCont.style.display = 'flex';
+                imageGallery.innerHTML = '';
+                for (let j = 0; j < db[i].images.length; j++) {
+                    let html = `
+                    <img src='${db[i].images[j]}'>
+                    `;
+                    imageGallery.innerHTML += html;
+                }
+                pod.style.boxShadow = 'none';
+                pod.style.boxShadow = 'rgba(42, 110, 198, 0.25) 0px 54px 55px, rgba(42, 110, 198, 0.12) 0px -12px 30px, rgba(42, 110, 198, 0.12) 0px 4px 6px, rgba(42, 110, 198, 0.17) 0px 12px 13px, rgba(42, 110, 198, 0.09) 0px -3px 5px';
+                setTimeout( function() {
+                    changeImage()
+                    pod.style.boxShadow = 'rgba(0, 0, 0, 0.35) 0px 5px 15px';
+                },2000);
+                searchExists = true;
+                break;
+            } else {
+                searchExists = false;
             }
-            searchExists = true;
-            break;
-        } else {
-            searchExists = false;
         }
-    }
-    if (!searchExists) {
-        searchMsg.textContent = searchNotFoundMsg;    
+        if (!searchExists) {
+            searchMsg.textContent = searchNotFoundMsg;    
+        }
     }  
 }
 

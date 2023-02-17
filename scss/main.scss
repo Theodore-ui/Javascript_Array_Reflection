@@ -6,21 +6,34 @@
 //variables
 @import 'variables.scss';
 
+//js applied shadows
+
+.green_box_shadow {
+    box-shadow: rgba(34, 139, 34, 0.5) 0px 5px 15px;
+}
+//body styles
+
 body {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
+    height: 100%;
     font-family: Poppins,sans-serif;
     font-size: 1rem;
     letter-spacing: .4px;
     line-height: 1.42857143;
+    height: 100%;
+    width: 100%;
+    background-color: #e27d6e;
+    
 }
 
 .btn {
     @include btn;
     color: white;
     i {
-        margin-left: 5px;
+        margin-left: 8px;
         color: white;
     }
 }
@@ -33,14 +46,25 @@ body {
 }
 
 .link_img {
-    margin: 30px auto auto 30px;
+    margin: 0;
     display: flex;
     flex-direction: row;
     border: 3px solid black;
     border-radius: 15px;
     width: 810px;
     height: 405px; 
-
+    margin: 50px 0 50px 0;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    transition: .5s ease;
+    position: relative;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    &:hover {
+        top: -10px;
+    } 
 }
 #image_container img {
     border-radius: 15px 0 0 15px;
@@ -60,17 +84,29 @@ body {
 .header_1 {
     margin-top: 0;
 }
+
 label {
     padding: 5px 10px;
     background-color: black;
     border-radius: 4px 0 0 4px;
     color: white;
 }
+
 input {
     width: 100%;
     border: 2px solid black;
     border-radius: 0 4px 4px 0;
     margin-left: -5px;
+}
+
+#email_input:focus {
+    outline: none;
+    background-color: $neonGreen;
+}
+
+#search_input:focus {
+    outline: none;
+    background-color: $futureBlue;
 }
 
 .img_buttons {
@@ -91,7 +127,7 @@ input {
 .refresh_img {
     background-color: $futureBlue;
     &:hover {
-        background-color: $darkblue;    
+        background-color: $darkBlue;    
     }
 }
 
@@ -99,7 +135,37 @@ input {
     background-color: $futureBlue;
     width: 200px;
     &:hover {
-        background-color: $darkblue;    
+        background-color: $darkBlue;    
+    }
+}
+
+#image_gallery_container {
+    display: none;
+    // max-width: 830px;
+    border: 3px solid black;
+    background-color: black;
+    border-radius: 15px; 
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.title {
+    margin: 0;
+    padding: 20px 0 10px 0;
+    color: white;
+    border-radius: 15px 15px 0 0;
+}
+
+#image_gallery {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    & img {
+        border-radius: 15px;
+        margin: 15px;
     }
 }
  
