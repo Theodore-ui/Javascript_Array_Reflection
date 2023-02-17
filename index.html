@@ -9,24 +9,35 @@
         <title>JavaScript array reflection</title>
     </head>
     <body>
-        <div>
-            <div id="image_container"></div>
-            <button type="button" id="refresh_img">Generate New Image</button>
-            <h2>Link the image to an email address</h2>
-            <label for="email" id="email_label">Email Address</label>
-            <input type="text" id="email_input" placeholder="john@email.com">
-            <p id="input_msg"></p>
-            <button type="submit" id="email_submit">Link</button>
+        <div class="link_img">
+            <div id="image_container">
+        
+            </div>
+            <div class="controls">
+                <h2 class="header_1">Link Image to Email</h2>
+                <div class="input_container">
+                    <label for="email" id="email_label">Email</label>
+                    <input type="text" id="email_input">
+                </div>
+                <p id="input_msg"></p>
+                <div class="img_buttons">
+                    <button type="submit" class="email_submit btn">Link<i class="fa-solid fa-link"></i></button>
+                    <button type="button" class="refresh_img btn">Generate New Image<i class="fa-solid fa-satellite"></i></button>
+                </div>
+                <h2>Search for Images</h2>
+                <div class="input_container">
+                    <label for="email" id="search_label">Email</label>
+                    <input type="text" id="search_input">
+                </div>
+                <p id="search_msg"></p>
+                <button type="submit" class="search_submit btn">Search Database<i class="fa-solid fa-inbox"></i></button>
+            </div>
         </div>
-        <div>
-            <h2>Search for images linked to an email address</h2>
-            <label for="email" id="search_label">Email Address</label>
-            <input type="text" id="search_input" placeholder="john@email.com">
-            <p id="search_msg"></p>
-            <button type="submit" id="search_submit">Search</button>
-            <div id="image_gallery"></div>
+        <div id="image_gallery">
+
         </div>
         <script src="js/jquery-3.6.3.min.js"></script>
         <script src="js/app.js"></script>
+        <script src="https://kit.fontawesome.com/1e403b2a33.js" crossorigin="anonymous"></script>
     </body>
 </html>

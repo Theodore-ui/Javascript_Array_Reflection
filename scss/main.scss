@@ -1,0 +1,110 @@
+//Imports 
+
+//mixins 
+@import 'mixins';
+
+//variables
+@import 'variables.scss';
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: Poppins,sans-serif;
+    font-size: 1rem;
+    letter-spacing: .4px;
+    line-height: 1.42857143;
+}
+
+.btn {
+    @include btn;
+    color: white;
+    i {
+        margin-left: 5px;
+        color: white;
+    }
+}
+
+.input_container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.link_img {
+    margin: 30px auto auto 30px;
+    display: flex;
+    flex-direction: row;
+    border: 3px solid black;
+    border-radius: 15px;
+    width: 810px;
+    height: 405px; 
+
+}
+#image_container img {
+    border-radius: 15px 0 0 15px;
+}
+
+.controls {
+    padding: 15px;
+    width: 375px;
+    height: 375px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    
+}
+
+.header_1 {
+    margin-top: 0;
+}
+label {
+    padding: 5px 10px;
+    background-color: black;
+    border-radius: 4px 0 0 4px;
+    color: white;
+}
+input {
+    width: 100%;
+    border: 2px solid black;
+    border-radius: 0 4px 4px 0;
+    margin-left: -5px;
+}
+
+.img_buttons {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    
+}
+
+.email_submit {
+    background-color: $neonGreen;
+    &:hover {
+        background-color: $darkGreen;
+    }
+}
+
+.refresh_img {
+    background-color: $futureBlue;
+    &:hover {
+        background-color: $darkblue;    
+    }
+}
+
+.search_submit {
+    background-color: $futureBlue;
+    width: 200px;
+    &:hover {
+        background-color: $darkblue;    
+    }
+}
+ 
+
+
+
+
+

@@ -1,23 +1,28 @@
 // random image display
 const card = document.querySelector('#image_container');
-const imgBtn = document.querySelector('#refresh_img');
+const imgBtn = document.querySelector('.refresh_img');
+const url = 'https://picsum.photos/405'; 
 
 //email validation
 const email = document.querySelector('#email_input');
 const emailMsg = document.querySelector("#input_msg");
-const emailBtn = document.querySelector("#email_submit");
+const emailBtn = document.querySelector(".email_submit");
 const emailRegex = /^[_\.0-9a-zA-Z-]+@([0-9a-zA-Z][0-9a-zA-Z-]+\.)+[a-zA-Z]{2,6}$/;
 const emailNullMsg = "Please enter your email";
 const emailFormatMsg = "Please enter a valid email";
 const emailSuccessMsg = "Success! your email has been linked to the image";
 const repeatImgMsg = "Image is aleardy Linked to email Address";
+
+// Placeholder element shown while an image is loading:
+const linkedIcon = `<i class="fa-solid fa-link"></i>`;
+
 //email and image shorage
-let db = []
+let db = [];
 
 //Image search
 const search = document.querySelector('#search_input');
 const searchMsg = document.querySelector("#search_msg");
-const searchBtn = document.querySelector("#search_submit");
+const searchBtn = document.querySelector(".search_submit");
 const imageGallery = document.querySelector('#image_gallery');
 const searchNotFoundMsg = "Email address not recognised";
 
@@ -30,15 +35,14 @@ function fetchData(url) {
 }
 
 Promise.all([
-    fetchData('https://picsum.photos/200')   
+    fetchData(url)   
 ])
+
 .then(data => {
     let randomImage = data[0].url;
     
     generateImage(randomImage);
 })
-
-//helper Functions 
 
 function checkStatus(response) {
     if(response.ok){
@@ -58,7 +62,7 @@ function generateImage(data) {
 
 function changeImage() {
     const img = card.querySelector('img');
-    fetchData('https://picsum.photos/200') 
+    fetchData(url) 
         .then(data => {
             img.src = data.url;
             img.alt = 'Random Image';
@@ -80,6 +84,7 @@ function validateEmail() {
         html = emailSuccessMsg;   
     }
     emailMsg.textContent = html;
+    
 }
 
 function checkImageRepeats(emailIn, image) {
@@ -117,6 +122,12 @@ function pushToDB(emailIn, image) {
     if (!emailExists) {
         db.push({email: email.value, images: [image]});
     }
+    emailBtn.style.display = 'none';
+    setTimeout( function() {
+        changeImage()
+        emailMsg.textContent = '';
+        emailBtn.style.display = 'block';
+    },2000);
 }
 
 
