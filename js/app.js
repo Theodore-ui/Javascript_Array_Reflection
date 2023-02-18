@@ -24,6 +24,7 @@ const searchBtn = document.querySelector(".search_submit");
 const imageGallery = document.querySelector('#image_gallery');
 const searchNotFoundMsg = "Email address not recognised";
 const imageGalleryCont = document.querySelector('#image_gallery_container');
+const exitBtn = document.querySelector('.exit');
 
 //Fetch functions
 
@@ -137,42 +138,45 @@ function pushToDB(emailIn, image) {
 //retrieve images 
 
 function retrieveImages() {
-    if (imageGalleryCont.style.display === 'flex') {
-        imageGalleryCont.style.display = 'none';    
-    } else {
-        let searchExists;
-        for (let i = 0; i < db.length; i++) {
-            if (db[i].email === search.value) {
-                imageGalleryCont.style.display = 'flex';
-                imageGallery.innerHTML = '';
-                for (let j = 0; j < db[i].images.length; j++) {
-                    let html = `
-                    <img src='${db[i].images[j]}'>
-                    `;
-                    imageGallery.innerHTML += html;
-                }
-                pod.style.boxShadow = 'none';
-                pod.style.boxShadow = 'rgba(42, 110, 198, 0.25) 0px 54px 55px, rgba(42, 110, 198, 0.12) 0px -12px 30px, rgba(42, 110, 198, 0.12) 0px 4px 6px, rgba(42, 110, 198, 0.17) 0px 12px 13px, rgba(42, 110, 198, 0.09) 0px -3px 5px';
-                setTimeout( function() {
-                    changeImage()
-                    pod.style.boxShadow = 'rgba(0, 0, 0, 0.35) 0px 5px 15px';
-                },2000);
-                searchExists = true;
-                break;
-            } else {
-                searchExists = false;
+    let searchExists;
+    for (let i = 0; i < db.length; i++) {
+        if (db[i].email === search.value) {
+            imageGalleryCont.style.display = 'flex';
+            imageGallery.innerHTML = '';
+            for (let j = 0; j < db[i].images.length; j++) {
+                let html = `
+                <img src='${db[i].images[j]}' alt='random image'>
+                `;
+                imageGallery.innerHTML += html;
             }
+            pod.style.boxShadow = 'none';
+            pod.style.boxShadow = 'rgba(42, 110, 198, 0.25) 0px 54px 55px, rgba(42, 110, 198, 0.12) 0px -12px 30px, rgba(42, 110, 198, 0.12) 0px 4px 6px, rgba(42, 110, 198, 0.17) 0px 12px 13px, rgba(42, 110, 198, 0.09) 0px -3px 5px';
+            setTimeout( function() {
+                changeImage()
+                pod.style.boxShadow = 'rgba(0, 0, 0, 0.35) 0px 5px 15px';
+            },2000);
+            searchExists = true;
+            break;
+        } else {
+            searchExists = false;
         }
-        if (!searchExists) {
-            searchMsg.textContent = searchNotFoundMsg;    
-        }
+    }
+    if (!searchExists) {
+        searchMsg.textContent = searchNotFoundMsg;    
     }  
+}
+
+//closing the gallery 
+
+function closeGallery () {
+    imageGalleryCont.style.display = 'none';
 }
 
 //Event Listeners
 imgBtn.addEventListener('click', changeImage);
 emailBtn.addEventListener('click', validateEmail);
 searchBtn.addEventListener('click', retrieveImages);
+exitBtn.addEventListener('click', closeGallery);
 
 
 
