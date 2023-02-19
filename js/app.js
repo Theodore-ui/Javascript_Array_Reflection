@@ -123,6 +123,10 @@ function pushToDB(emailIn, image) {
     if (!emailExists) {
         db.push({email: email.value, images: [image]});
     }
+    pushToDBAnimations() 
+}
+
+function pushToDBAnimations() {
     pod.style.boxShadow = 'none';
     pod.style.boxShadow = 'rgba(37, 162, 90, 0.25) 0px 54px 55px, rgba(37, 162, 90, 0.12) 0px -12px 30px, rgba(37, 162, 90, 0.12) 0px 4px 6px, rgba(37, 162, 90, 0.17) 0px 12px 13px, rgba(37, 162, 90, 0.09) 0px -3px 5px';
     emailBtn.style.display = 'none';
@@ -131,9 +135,8 @@ function pushToDB(emailIn, image) {
         pod.style.boxShadow = 'rgba(0, 0, 0, 0.35) 0px 5px 15px';
         emailMsg.textContent = '';
         emailBtn.style.display = 'block';
-    },2000); 
+    },2000);
 }
-
 
 //retrieve images 
 
