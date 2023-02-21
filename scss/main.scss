@@ -103,16 +103,10 @@ input {
     border: 2px solid black;
     border-radius: 0 4px 4px 0;
     margin-left: -5px;
-}
-
-#email_input:focus {
-    outline: none;
-    background-color: $neonGreen;
-}
-
-#search_input:focus {
-    outline: none;
-    background-color: $futureBlue;
+    &:focus {
+        background-color: $grey;
+        outline: none;
+    }
 }
 
 .img_buttons {
@@ -152,6 +146,7 @@ input {
     background-color: black;
     border-radius: 15px; 
     flex-direction: column;
+    min-width: 435px;
 }
 
 .top_bar {
@@ -171,26 +166,48 @@ input {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: white;
+    background-color: transparent;
     padding: 10px 10px;
     & i {
         vertical-align: baseline;
-        color: black;
-        font-size: 2.2rem;
+        color: white;
+        font-size: 2.5rem;
         margin: 0;
+    }
+    &:hover  i {
+        color: red;    
     }
 }
 
-#image_gallery {
+.image_gallery {
+    border: 3px solid black;
+    background-color: black;
+    border-radius: 15px; 
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
+    position: relative;
     & img {
         border-radius: 15px;
         margin: 15px;
+        &:after {
+            content: '\f0da';
+            font-family: FontAwesome;
+            font-weight: normal;
+            font-style: normal;
+            margin:0px 0px 0px 10px;
+            text-decoration: none;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 3;
+        }
     }
+    
 }
  
 
