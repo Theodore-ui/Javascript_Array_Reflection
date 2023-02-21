@@ -11,7 +11,7 @@ const url = 'https://picsum.photos/405';
 
 //email validation
 const email = document.querySelector('#email_input');
-const emailMsg = document.querySelector("#input_msg");
+const emailMsg = document.querySelector(".input_msg");
 const emailBtn = document.querySelector(".email_submit");
 const emailRegex = /^[_\.0-9a-zA-Z-]+@([0-9a-zA-Z][0-9a-zA-Z-]+\.)+[a-zA-Z]{2,6}$/;
 const emailNullMsg = "Please enter an email";
@@ -25,12 +25,13 @@ let db = [];
 
 //Image search
 const search = document.querySelector('#search_input');
-const searchMsg = document.querySelector("#search_msg");
+const searchMsg = document.querySelector(".search_msg");
 const searchBtn = document.querySelector(".search_submit");
 const imageGallery = document.querySelector('.image_gallery');
 const searchNotFoundMsg = "Email address not recognised";
 const imageGalleryCont = document.querySelector('#image_gallery_container');
 const exitBtn = document.querySelector('.exit');
+const subTitle = document.querySelector('.sub_title');
 
 //Fetch functions
 
@@ -125,10 +126,9 @@ function pushToDB(emailIn, image) {
         if (db[i].email === emailIn) {
             db[i].images.push(image)
             emailExists = true;
-            if (imageGallery.classList.contains(emailIn)) {
+            if (imageGallery.classList.contains(emailIn) && imageGalleryCont.style.display === 'flex') {
                 retrieveImages()   
             }
-
             break;
         } else {
             emailExists = false;
@@ -159,6 +159,7 @@ function retrieveImages() {
     for (let i = 0; i < db.length; i++) {
         if (db[i].email === search.value) {
             imageGalleryCont.style.display = 'flex';
+            subTitle.textContent = search.value;
             imageGallery.innerHTML = '';
             for (let j = 0; j < db[i].images.length; j++) {
                 let html = `
@@ -183,7 +184,6 @@ function retrieveImages() {
         searchMsg.textContent = searchNotFoundMsg;    
     }
     setTimeout( function() {
-        changeImage()
         searchMsg.textContent = '';
     },1500); 
 }
@@ -192,9 +192,8 @@ function retrieveImagesAnimations() {
     pod.style.boxShadow = 'none';
     pod.style.boxShadow = $blueBoxShadow;
     setTimeout( function() {
-        changeImage()
         pod.style.boxShadow = 'rgba(0, 0, 0, 0.35) 0px 5px 15px';
-    },2000);
+    },1500);
 }
 
 //closing the gallery 
@@ -205,14 +204,15 @@ function closeGallery () {
 
 //removing an image from the gallery
 
+
+
 function removeImage(e) {
     e.target.remove();
+
+    const index = db.find(item => item.email === subTitle.textContent).images.indexOf(e.target);
+        
+    db[subTitle.textContent].images.splice(index,1);
 }
-
-// if (imageGallery.innerHTML = '') {
-//     imageGalleryCont.style.di
-// }
-
 //Event Listeners
 
     

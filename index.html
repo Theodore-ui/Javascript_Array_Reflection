@@ -19,7 +19,7 @@
                     <label for="email" id="email_label">Email</label>
                     <input type="text" id="email_input">
                 </div>
-                <p id="input_msg"></p>
+                <p class="msg input_msg"></p>
                 <div class="img_buttons">
                     <button type="submit" class="email_submit btn">Link<i class="fa-solid fa-link"></i></button>
                     <button type="button" class="refresh_img btn">Generate New Image<i class="fa-solid fa-satellite"></i></button>
@@ -29,13 +29,16 @@
                     <label for="email" id="search_label">Email</label>
                     <input type="text" id="search_input">
                 </div>
-                <p id="search_msg"></p>
+                <p class="msg search_msg"></p>
                 <button type="submit" class="search_submit btn">Search Database<i class="fa-solid fa-inbox"></i></button>
             </div>
         </div>
         <div id="image_gallery_container">
             <div class="top_bar">
-                <h1 class="title">Image Gallery</h1>
+                <div class="bar_left">
+                    <h1 class="title">Image Gallery</h1>
+                    <p class="sub_title"></p>
+                </div>
                 <button class="exit btn"><i class="fa-solid fa-xmark"></i></button>
             </div>
             <div class="image_gallery">
