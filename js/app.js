@@ -79,6 +79,7 @@ function changeImage() {
 //validate email
 
 function validateEmail() { 
+    const emailInput = email.value.toLowerCase();
     const img = card.querySelector('img');
     if (email.value === '') {
         html = emailNullMsg; 
@@ -86,13 +87,13 @@ function validateEmail() {
     } else if (!email.value.match(emailRegex)) {
         html = emailFormatMsg;
         emailMsg.style.color = 'red';
-    } else if (checkImageRepeats(email.value, img.src) === true) {
+    } else if (checkImageRepeats(emailInput, img.src) === true) {
         html = repeatImgMsg;
         emailMsg.style.color = 'red'; 
     } else {
         html = emailSuccessMsg; 
         emailMsg.style.color = $darkGreen; 
-        pushToDB(email.value, img.src); 
+        pushToDB(emailInput, img.src); 
     }
     emailMsg.textContent = html;
     
@@ -135,7 +136,7 @@ function pushToDB(emailIn, image) {
         }
     }
     if (!emailExists) {
-        db.push({email: email.value, images: [image]});
+        db.push({email: emailIn, images: [image]});
     }
     pushToDBAnimations() 
 }
@@ -155,11 +156,12 @@ function pushToDBAnimations() {
 //retrieve images 
 
 function retrieveImages() {
+    const searchInput = search.value.toLowerCase();
     let searchExists;
     for (let i = 0; i < db.length; i++) {
-        if (db[i].email === search.value) {
+        if (db[i].email === searchInput) {
             imageGalleryCont.style.display = 'flex';
-            subTitle.textContent = search.value;
+            subTitle.textContent = searchInput;
             imageGallery.innerHTML = '';
             for (let j = 0; j < db[i].images.length; j++) {
                 let html = `
@@ -167,7 +169,7 @@ function retrieveImages() {
                 `;
                 imageGallery.innerHTML += html;
                 imageGallery.className = '';
-                imageGallery.classList.add('image_gallery', search.value);
+                imageGallery.classList.add('image_gallery', searchInput);
             }
             for (i of imageGallery.querySelectorAll('img')) {
                 i.addEventListener('click', removeImage);
