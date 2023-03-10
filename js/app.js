@@ -24,7 +24,7 @@ const pod = document.querySelector('.link_img');
 let db = [];
 
 //Image search
-const search = document.querySelector('#search_input');
+const search = document.querySelector('#select');
 const searchMsg = document.querySelector(".search_msg");
 const searchBtn = document.querySelector(".search_submit");
 const imageGallery = document.querySelector('.image_gallery');
@@ -137,6 +137,7 @@ function pushToDB(emailIn, image) {
     }
     if (!emailExists) {
         db.push({email: emailIn, images: [image]});
+        dropDownMenu(emailIn);
     }
     pushToDBAnimations() 
 }
@@ -215,11 +216,23 @@ function removeImage(e) {
         
     db[subTitle.textContent].images.splice(index,1);
 }
+
+
+//email list drop down menu 
+const select = document.getElementById("select");
+
+function dropDownMenu(menuItem) {
+    let html = `
+    <option>${menuItem}</option>
+    `;
+    select.innerHTML += html;
+}
+
 //Event Listeners
 
     
 
-
+// select.addEventListener('click', dropDownMenu);
 imgBtn.addEventListener('click', changeImage);
 emailBtn.addEventListener('click', validateEmail);
 searchBtn.addEventListener('click', retrieveImages);
