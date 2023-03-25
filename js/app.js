@@ -3,6 +3,7 @@
 const $darkGreen = '#25a25a';
 const $greenBoxShadow = 'rgba(37, 162, 90, 0.25) 0px 54px 55px, rgba(37, 162, 90, 0.12) 0px -12px 30px, rgba(37, 162, 90, 0.12) 0px 4px 6px, rgba(37, 162, 90, 0.17) 0px 12px 13px, rgba(37, 162, 90, 0.09) 0px -3px 5px';
 const $blueBoxShadow = 'rgba(42, 110, 198, 0.25) 0px 54px 55px, rgba(42, 110, 198, 0.12) 0px -12px 30px, rgba(42, 110, 198, 0.12) 0px 4px 6px, rgba(42, 110, 198, 0.17) 0px 12px 13px, rgba(42, 110, 198, 0.09) 0px -3px 5px';
+
 // random image display
 const card = document.querySelector('#image_container');
 const imgBtn = document.querySelector('.refresh_img');
@@ -212,13 +213,16 @@ function closeGallery () {
 function removeImage(e) {
     e.target.remove();
 
-    const index = db.find(item => item.email === subTitle.textContent).images.indexOf(e.target);
+    const index = db.indexOf(db.find(item => item.email === subTitle.textContent));
+    const imgIndex = db.find(item => item.email === subTitle.textContent).images.indexOf(e.target);
         
-    db[subTitle.textContent].images.splice(index,1);
+    db[index].images.splice(imgIndex,1);
+
 }
 
 
-//email list drop down menu 
+//email list drop down menu
+
 const select = document.getElementById("select");
 
 function dropDownMenu(menuItem) {
@@ -228,9 +232,8 @@ function dropDownMenu(menuItem) {
     select.innerHTML += html;
 }
 
-//Event Listeners
 
-    
+//Event Listeners
 
 // select.addEventListener('click', dropDownMenu);
 imgBtn.addEventListener('click', changeImage);
